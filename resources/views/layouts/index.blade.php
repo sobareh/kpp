@@ -8,11 +8,12 @@
     <meta name="author" content="">
     <title>SMART App - @yield('title')</title>
     <link rel="icon" type="image/png" sizes="96x96" href="icon/favicon-96x96.png">
-    <link href="theme/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('theme/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-    <link href="theme/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="{{ asset('theme/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    @stack('scripts')
 </head>
 <body>
     
@@ -272,21 +273,45 @@
         </div>
     </div>
 
+    
+
     <!-- Bootstrap core JavaScript-->
-    <script src="theme/vendor/jquery/jquery.min.js"></script>
-    <script src="theme/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('theme/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('theme/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="theme/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="{{ asset('theme/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="theme/js/sb-admin-2.min.js"></script>
+    <script src="{{ asset('theme/js/sb-admin-2.min.js') }}"></script>
 
     <!-- Page level plugins -->
-    <script src="theme/vendor/chart.js/Chart.min.js"></script>
+    <script src="{{ asset('theme/vendor/chart.js/Chart.min.js') }}"></script>
 
     <!-- Page level custom scripts -->
-    <script src="theme/js/demo/chart-area-demo.js"></script>
-    <script src="theme/js/demo/chart-pie-demo.js"></script>
+    <script src="{{ asset('theme/js/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('theme/js/demo/chart-pie-demo.js') }}"></script>
+    <script>
+        let listSeksi = [];
+    
+        function myFunction() {
+          let data = document.getElementById("seksi");
+          let kasi = data.options[data.selectedIndex].value;
+          listSeksi.push(kasi);
+          console.log(listSeksi);
+          addList();
+          return ;
+        }
+
+        function addList() {
+            let list = document.getElementById("myList");
+            list.innerHTML = '';
+            for( i=0 ; i < listSeksi.length ; i++) {
+                list.innerHTML += `<li> ${listSeksi[i]} : Priority ${listSeksi.indexOf(listSeksi[i]) + 1}</li>`;
+            }
+            return;
+        }
+      </script>
+    
 </body>
 </html>

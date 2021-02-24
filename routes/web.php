@@ -15,10 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', 'TaskListController@index');
+// Route::get('/home', 'TaskListController@index');
 
 Route::get('/create', function () {
     return view('pages.create');
 } );
 
-Route::post('/test','TaskListController@create');
+// Route::post('/test','TaskController@create');
+
+Route::resource('task', 'TaskController');
