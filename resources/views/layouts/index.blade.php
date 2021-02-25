@@ -293,7 +293,6 @@
     <script src="{{ asset('theme/js/demo/chart-pie-demo.js') }}"></script>
     <script>
         let listSeksi = [];
-    
         function myFunction() {
           let data = document.getElementById("seksi");
           let kasi = data.options[data.selectedIndex].value;
@@ -309,6 +308,7 @@
             for( i=0 ; i < listSeksi.length ; i++) {
                 list.innerHTML += `<li> ${listSeksi[i]} : Priority ${listSeksi.indexOf(listSeksi[i]) + 1}</li>`;
             }
+            document.querySelector(`option[value="${listSeksi[listSeksi.length - 1]}"]`).remove();
             return;
         }
       </script>
