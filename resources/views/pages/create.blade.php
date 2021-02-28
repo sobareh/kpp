@@ -40,16 +40,16 @@
                 <div class="form-row">
                   <div class="col">
                     <select class="form-control" id="seksi">
-                      <option value="1">Kepala Seksi Pelayanan</option>
-                      <option value="2">Kepala Subbagian Umum dan Kepatuhan Internal</option>
-                      <option value="3">Kepala Seksi Pengolahan Data dan Informasi</option>
-                      <option value="4">Kepala Seksi Penagihan</option>
-                      <option value="5">Kepala Seksi Pemeriksaan</option>
-                      <option value="6">Kepala Seksi Pengawasan dan Konsultasi I</option>
-                      <option value="7">Kepala Seksi Pengawasan dan Konsultasi II</option>
-                      <option value="8">Kepala Seksi Pengawasan dan Konsultasi III</option>
-                      <option value="9">Kepala Seksi Pengawasan dan Konsultasi IV</option>
-                      <option value="10">Kepala Seksi Ekstensifikasi dan Penyuluhan</option>
+                      <option value="1">Seksi Pelayanan</option>
+                      <option value="2">Subbagian Umum dan Kepatuhan Internal</option>
+                      <option value="3">Seksi Pengolahan Data dan Informasi</option>
+                      <option value="4">Seksi Penagihan</option>
+                      <option value="5">Seksi Pemeriksaan</option>
+                      <option value="6">Seksi Pengawasan dan Konsultasi I</option>
+                      <option value="7">Seksi Pengawasan dan Konsultasi II</option>
+                      <option value="8">Seksi Pengawasan dan Konsultasi III</option>
+                      <option value="9">Seksi Pengawasan dan Konsultasi IV</option>
+                      <option value="10">Seksi Ekstensifikasi dan Penyuluhan</option>
                       <option value="11">Supervisor Pemeriksa Pajak 1</option>
                       <option value="12">Supervisor Pemeriksa Pajak 2</option>
                       <option value="13">Supervisor Pemeriksa Pajak 3</option>
@@ -72,24 +72,55 @@
 </div>
 @endsection
 
-{{-- 
-@push('scripts')
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript">
-    function sendData() {
-        var data = [
-            1,
-            2,
-            3
-        ];
-        $.ajax({
-            url:'/test',
-            type: 'POST',
-            dataType:'json',
-            contentType: 'json',
-            data: JSON.stringify(listSeksi),
-            contentType: 'application/json; charset=utf-8',
-        });
-    }
-  </script>
-@endpush --}}
+
+@section('scripts')
+<script>
+  let listSeksi = [];
+  function myFunction() {
+     const data = document.getElementById("seksi");
+     const kasi = {
+         userId: data.options[data.selectedIndex].value,
+         priority: null
+     } 
+     
+    listSeksi.push(kasi);    
+    const priorityNum = listSeksi.findIndex(object => object.userId === data.options[data.selectedIndex].value);
+    listSeksi[priorityNum].priority = priorityNum + 1; 
+    console.log(listSeksi);
+    addList();
+    return;
+  }
+
+  function addList() {
+      const list = document.getElementById("myList");
+      list.innerHTML = '';
+      for( i=0 ; i < listSeksi.length ?? 0 ; i++) {
+          list.innerHTML += `<li> ${document.querySelector(`option[value="${listSeksi[i].userId}"`).textContent} : Urutan Pengerjaan ke- ${listSeksi[i].priority}</li>`;
+      }
+      
+      document.querySelector(`option[value="${listSeksi[listSeksi.length - 1].priority + 1}"]`).setAttribute('selected','true');          
+      document.querySelector(`option[value="${listSeksi[listSeksi.length - 1].userId}"]`).style.display = "none";          
+      return;
+  }
+
+  const fetchData = async () => {
+      let response = await fetch("/api/tasklist",
+              {
+                  headers: {
+                      'Accept': 'application/json',
+                      'Content-Type': 'application/json'
+                  },
+                  method: "POST",
+                  body: JSON.stringify(listSeksi)
+              });
+              const content = await response.json();
+              console.log(content);
+              return;
+  }
+
+  document.getElementById('addTask').addEventListener('submit', (event) => {
+    event.preventDefault();
+    fetchData();
+  });
+</script>
+@endsection

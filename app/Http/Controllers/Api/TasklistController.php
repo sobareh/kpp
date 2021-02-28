@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\TaskList;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class TaskController extends Controller
+class TasklistController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $data = TaskList::paginate(5);
-
-        return view('pages.home', ['data' => $data]);
+        //
     }
 
     /**
@@ -26,7 +24,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('pages.create');
+        //
     }
 
     /**
@@ -37,21 +35,18 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
+        $data = json_decode($request->getContent(), true);
 
-        // ]);
+        // $yummy = json_decode($json);
+        dd($data);
+        // return echo ; //5004
 
-        $newTask = new TaskList;
-        $newTask->uraian_kegiatan = request('uraian_kegiatan');
-        $newTask->sumber = request('sumber');
-        $newTask->jatuh_tempo = request('jatuh_tempo');
-        $newTask->url_berkas = request('url_berkas');
-        
-        $newTask->save();
 
-        return;
-        //  response()->json(["messsage" => "Data Berhasil disimpan"], 200);
-        
+        return response()->json([
+            'Message' => 'Success Test API Endpoint',
+            'state' => 'CA',
+            'data' => $data[0]->priority
+        ]);
     }
 
     /**
