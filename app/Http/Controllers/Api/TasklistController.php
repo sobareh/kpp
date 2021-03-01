@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\TaskItem;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class TasklistController extends Controller
 {
@@ -36,17 +37,20 @@ class TasklistController extends Controller
     public function store(Request $request)
     {
         $data = json_decode($request->getContent(), true);
-
-        // $yummy = json_decode($json);
-        dd($data);
-        // return echo ; //5004
-
+        
+        foreach ($data as $item) {
+            $tasklist = new TaskItem;
+            $tasklist->tasklist_id = 1;
+            $tasklist->user_id = $item["userId"];
+            $tasklist->priority = intval($item["priority"]);
+            $tasklist->save();
+        }
 
         return response()->json([
             'Message' => 'Success Test API Endpoint',
-            'state' => 'CA',
-            'data' => $data[0]->priority
-        ]);
+            'state' => 'CA'
+            // 'data' => $data[0]->priority
+        ]);;
     }
 
     /**
