@@ -99,7 +99,6 @@
     </div>
 </div>
 
-{{ csrf_token() }}
 <div class="row">
     <div class="col-lg-12 mb-8">
         <div class="card shadow mb-4">
@@ -207,7 +206,7 @@
                   <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
                       src="theme/img/undraw_posting_photo.svg" alt="">
               </div>
-              <p>Selamat Datang di aplikasi SMART KPP Pratama Medan Barat</p>
+              <p>Selamat Datang di KPP Pratama Baturaja</p>
               <a target="_blank" rel="nofollow" href="https://undraw.co/">Get to Know the App &rarr;</a>
           </div>
       </div>

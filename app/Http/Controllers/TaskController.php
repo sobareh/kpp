@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\TaskList;
+use App\Task;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -14,7 +14,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $data = TaskList::paginate(5);
+        $data = Task::paginate(5);
 
         return view('pages.home', ['data' => $data]);
     }
@@ -41,7 +41,7 @@ class TaskController extends Controller
 
         // ]);
 
-        $newTask = new TaskList;
+        $newTask = new Task;
         $newTask->uraian_kegiatan = request('uraian_kegiatan');
         $newTask->sumber = request('sumber');
         $newTask->jatuh_tempo = request('jatuh_tempo');

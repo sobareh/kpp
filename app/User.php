@@ -2,12 +2,15 @@
 
 namespace App;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\TaskUser;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +21,9 @@ class User extends Authenticatable
         'name', 'username', 'password', 'position', 'role_id'
     ];
 
-    public function tasklists()
+    public function tasks()
     {
-        return $this->belongsToMany("App\Tasklist");
+        return $this->belongsToMany("App\Task");
     }
 
     

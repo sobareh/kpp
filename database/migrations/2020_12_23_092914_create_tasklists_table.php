@@ -13,7 +13,7 @@ class CreateTasklistsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tasklists', function (Blueprint $table) {
+        Schema::create('tasks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('uraian_kegiatan', 255);
             $table->string('sumber',100);

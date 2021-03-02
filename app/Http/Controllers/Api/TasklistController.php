@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\TaskItem;
+use App\TaskUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -39,8 +39,8 @@ class TasklistController extends Controller
         $data = json_decode($request->getContent(), true);
         
         foreach ($data as $item) {
-            $tasklist = new TaskItem;
-            $tasklist->tasklist_id = 1;
+            $tasklist = new TaskUser;
+            $tasklist->task_id = 1;
             $tasklist->user_id = $item["userId"];
             $tasklist->priority = intval($item["priority"]);
             $tasklist->save();
