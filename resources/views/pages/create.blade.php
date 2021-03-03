@@ -7,7 +7,7 @@
 @section('content')
 <div class="row">
 
-  <div class="col-lg-9 mb-4">
+  <div class="col-lg-9 mb-4 mx-auto">
 
       <!-- Illustrations -->
       <div class="card shadow mb-4">
@@ -15,57 +15,56 @@
               <h6 class="m-0 font-weight-bold text-primary">Tambah Data</h6>
           </div>
           <div class="card-body">
-            <form action="/task"  method="POST">
-              @csrf
-              <div class="form-group">
-                <label for="exampleFormControlInput1">Uraian Kegiatan</label>
-                <input type="text" name="uraian_kegiatan" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlInput1">Sumber</label>
-                <input type="text" name="sumber" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlInput1">Jatuh Tempo</label>
-                <input type="date" name="jatuh_tempo" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlInput1">Berkas</label>
-                <input type="file" name="berkas" class="form-control">
-              </div>
-              
-              
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Delegasikan Tugas Ke:</label>
-                <div class="form-row">
-                  <div class="col">
-                    <select class="form-control" id="seksi">
-                      <option value="1">Seksi Pelayanan</option>
-                      <option value="2">Subbagian Umum dan Kepatuhan Internal</option>
-                      <option value="3">Seksi Pengolahan Data dan Informasi</option>
-                      <option value="4">Seksi Penagihan</option>
-                      <option value="5">Seksi Pemeriksaan</option>
-                      <option value="6">Seksi Pengawasan dan Konsultasi I</option>
-                      <option value="7">Seksi Pengawasan dan Konsultasi II</option>
-                      <option value="8">Seksi Pengawasan dan Konsultasi III</option>
-                      <option value="9">Seksi Pengawasan dan Konsultasi IV</option>
-                      <option value="10">Seksi Ekstensifikasi dan Penyuluhan</option>
-                      <option value="11">Supervisor Pemeriksa Pajak 1</option>
-                      <option value="12">Supervisor Pemeriksa Pajak 2</option>
-                      <option value="13">Supervisor Pemeriksa Pajak 3</option>
-                    </select>
-                  </div>
-                  <div class="col">
-                    <button class="btn btn-info" type="button" onclick="myFunction()">Tambah</button>
+            <div class="col-lg-8 col-md-6 mx-auto">
+              <form action="/task"  method="POST">
+                @csrf
+                <div class="form-group">
+                  <label>Uraian Kegiatan</label>
+                  <input type="text" name="uraian_kegiatan" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>Sumber</label>
+                  <input type="text" name="sumber" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>Jatuh Tempo</label>
+                  <input type="date" name="jatuh_tempo" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>Berkas</label>
+                  <input type="file" name="berkas" class="form-control">
+                </div>              
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Delegasikan Tugas Ke:</label>
+                  <div class="form-row">
+                    <div class="col">
+                      <select class="form-control" id="seksi">
+                        <option value="1">Seksi Pelayanan</option>
+                        <option value="2">Subbagian Umum dan Kepatuhan Internal</option>
+                        <option value="3">Seksi Pengolahan Data dan Informasi</option>
+                        <option value="4">Seksi Penagihan</option>
+                        <option value="5">Seksi Pemeriksaan</option>
+                        <option value="6">Seksi Pengawasan dan Konsultasi I</option>
+                        <option value="7">Seksi Pengawasan dan Konsultasi II</option>
+                        <option value="8">Seksi Pengawasan dan Konsultasi III</option>
+                        <option value="9">Seksi Pengawasan dan Konsultasi IV</option>
+                        <option value="10">Seksi Ekstensifikasi dan Penyuluhan</option>
+                        <option value="11">Supervisor Pemeriksa Pajak 1</option>
+                        <option value="12">Supervisor Pemeriksa Pajak 2</option>
+                        <option value="13">Supervisor Pemeriksa Pajak 3</option>
+                      </select>
+                    </div>
+                    
+                      <button class="d-sm-block btn btn-sm btn-info shadow-sm mb-2" type="button" onclick="myFunction()">Tambah</button>
+                    
                   </div>
                 </div>
-              </div>
-              <ul id="myList">
-                
-              </ul>
-              
-              <button class="btn btn-primary" type="submit" id="addTask">Simpan</button>
-            </form>
+                <ul id="myList"></ul>
+                <div class="form-group">
+                <button class="btn btn-sm btn-primary btn-block shadow-sm mb-2" type="submit" id="addTask">Simpan</button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
   </div>

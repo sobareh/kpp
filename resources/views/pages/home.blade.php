@@ -106,7 +106,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">Summary Data</h6>
             </div>
             <div class="card-body">
-                 <a href="task/create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-2"><i
+                 <a href="/task/create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-2"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Tambah Data</a>
                 <table class="table table-bordered">
                     <thead>
@@ -204,7 +204,7 @@
           <div class="card-body">
               <div class="text-center">
                   <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                      src="theme/img/undraw_posting_photo.svg" alt="">
+                      src="{{ asset('theme/img/undraw_posting_photo.svg') }}" alt="">
               </div>
               <p>Selamat Datang di KPP Pratama Baturaja</p>
               <a target="_blank" rel="nofollow" href="https://undraw.co/">Get to Know the App &rarr;</a>
