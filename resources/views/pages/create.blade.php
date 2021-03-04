@@ -76,11 +76,11 @@
 <script>
   let listSeksi = [];
   function myFunction() {
-     const data = document.getElementById("seksi");
-     const kasi = {
-         userId: data.options[data.selectedIndex].value,
-         priority: null
-     } 
+    const data = document.getElementById("seksi");
+    const kasi = {
+        userId: data.options[data.selectedIndex].value,
+        priority: null
+    } 
      
     listSeksi.push(kasi);    
     const priorityNum = listSeksi.findIndex(object => object.userId === data.options[data.selectedIndex].value);

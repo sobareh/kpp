@@ -16,3 +16,5 @@ Route::get('/', function () {
 });
 
 Route::resource('task', 'TaskController');
+
+Route::view('detail', 'pages.detail');
