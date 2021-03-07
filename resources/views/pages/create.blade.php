@@ -16,7 +16,7 @@
           </div>
           <div class="card-body">
             <div class="col-lg-8 col-md-6 mx-auto">
-              <form action="/task"  method="POST">
+              <form action="/task"  method="POST" autocomplete="off" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                   <label>Uraian Kegiatan</label>
@@ -24,20 +24,27 @@
                 </div>
                 <div class="form-group">
                   <label>Sumber</label>
-                  <input type="text" name="sumber" class="form-control">
+                  <input list="sumbers" name="sumber" id="sumber" class="form-control">
+                  <datalist id="sumbers">
+                    <option value="Nadine">
+                    <option value="Risalah Rapat">
+                    <option value="Nota Dinas">
+                    <option value="Memo">
+                    <option value="Perintah Langsung">
+                  </datalist>
                 </div>
                 <div class="form-group">
                   <label>Jatuh Tempo</label>
-                  <input type="date" name="jatuh_tempo" class="form-control">
+                  <input type="date" name="jatuh_tempo" class="form-control col-4">
                 </div>
                 <div class="form-group">
                   <label>Berkas</label>
-                  <input type="file" name="berkas" class="form-control">
+                    <input type="file" name="berkas" id="berkas" class="col-lg-6 col-md-8">
                 </div>              
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Delegasikan Tugas Ke:</label>
                   <div class="form-row">
-                    <div class="col">
+                    <div class="col-7">
                       <select class="form-control" id="seksi">
                         <option value="1">Seksi Pelayanan</option>
                         <option value="2">Subbagian Umum dan Kepatuhan Internal</option>
@@ -55,13 +62,13 @@
                       </select>
                     </div>
                     
-                      <button class="d-sm-block btn btn-sm btn-info shadow-sm mb-2" type="button" onclick="myFunction()">Tambah</button>
+                      <button class="d-sm-block btn btn-sm btn-primary shadow-sm mt-1 mb-1" type="button" onclick="myFunction()">Tambah</button>
                     
                   </div>
                 </div>
                 <ul id="myList"></ul>
                 <div class="form-group">
-                <button class="btn btn-sm btn-primary btn-block shadow-sm mb-2" type="submit" id="addTask">Simpan</button>
+                <button class="btn btn-sm btn-danger btn-inline-block shadow-sm px-4 py-2 mt-2 mb-5" type="submit" id="addTask">Simpan</button>
                 </div>
               </form>
             </div>
@@ -120,6 +127,19 @@
   document.getElementById('addTask').addEventListener('submit', (event) => {
     event.preventDefault();
     fetchData();
+  });
+
+
+  const inputElement = document.querySelector("input[id='berkas']");
+  const pond = FilePond.create(inputElement);
+  FilePond.setOptions({
+    server: {
+      url: '/upload',
+      headers: {
+        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+      },
+      instantUpload: false
+    }
   });
 </script>
 @endsection

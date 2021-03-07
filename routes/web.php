@@ -16,5 +16,6 @@ Route::get('/', function () {
 });
 
 Route::resource('task', 'TaskController');
+Route::post('upload', 'TaskController@upload');
 
 Route::view('detail', 'pages.detail');

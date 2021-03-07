@@ -1,30 +1,30 @@
 .timeline-item {
-  align-items: flex-start;
-  justify-content: center;
-  box-sizing: border-box;
-  color: rgb(105, 112, 122);
-  display: flex;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-  overflow-wrap: break-word;
-  text-align: left;
+    align-items: flex-start;
+    justify-content: center;
+    box-sizing: border-box;
+    color: rgb(105, 112, 122);
+    display: flex;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    overflow-wrap: break-word;
+    text-align: left;
 }
 
 .timeline-item-content {
-  border-left-color: rgb(242, 246, 252);
-  border-left-style: solid;
-  border-left-width: 4px;
-  box-sizing: border-box;
-  color: rgb(105, 112, 122);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-  padding-bottom: 48px;
-  padding-left: 48px;
-  padding-top: 0px;
-  text-align: left;
-  width: 559.8px;
+    border-left-color: rgb(242, 246, 252);
+    border-left-style: solid;
+    border-left-width: 4px;
+    box-sizing: border-box;
+    color: rgb(105, 112, 122);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    padding-bottom: 48px;
+    padding-left: 48px;
+    padding-top: 0px;
+    text-align: left;
+    width: 559.8px;
 }
 
 .shadow-sm {
@@ -32,13 +32,12 @@
 }
 
 .timeline-item-marker {
-  flex-direction: row;
-  transform: translateX(1.625rem);
-  margin-bottom: 0;
-  overflow-wrap: break-word;
-  display: inline-flex;
-  height: 100%;
-  
+    flex-direction: row;
+    transform: translateX(1.625rem);
+    margin-bottom: 0;
+    overflow-wrap: break-word;
+    display: inline-flex;
+    height: 100%;
 }
 
 .timeline-item-marker-indicator {
@@ -48,7 +47,7 @@
     height: 3rem;
     width: 3rem;
     background-color: #f2f6fc;
-    border-radius: 100%; 
+    border-radius: 100%;
 }
 
 .timeline-item-marker-text {
@@ -66,10 +65,16 @@
 }
 
 .feather {
-  height: 1rem;
-  height: 1rem;
+    height: 1rem;
+    height: 1rem;
 }
 
 .bg-success-soft {
-  background-color: #daefed !important;
+    background-color: #daefed !important;
 }
+
+/* .filepond-height {
+    height: 0px;
+    position: relative;
+    z-index: 0;
+} */

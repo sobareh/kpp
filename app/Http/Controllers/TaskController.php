@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use App\TemporaryFile;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -37,20 +38,30 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
+        $request->validate([
+            'uraian_kegiatan' => 'required',
+            'sumber' => 'required',
+            'jatuh_tempo' => 'required',
+        ]);
 
-        // ]);
+        $newTask = Task::create([
+           'uraian_kegiatan' => request('uraian_kegiatan'),
+           'sumber' => request('sumber'),
+           'jatuh_tempo' => request('jatuh_tempo'),
+           'url_berkas' => request('berkas'),
+        ]);
 
-        $newTask = new Task;
-        $newTask->uraian_kegiatan = request('uraian_kegiatan');
-        $newTask->sumber = request('sumber');
-        $newTask->jatuh_tempo = request('jatuh_tempo');
-        $newTask->url_berkas = request('url_berkas');
-        
-        $newTask->save();
+        $temporaryFile = TemporaryFile::where('folder', $request->berkas)->first();
 
-        return;
-        //  response()->json(["messsage" => "Data Berhasil disimpan"], 200);
+        if ($temporaryFile) {
+            $newTask->addMedia(storage_path('app/berkas/tmp/' . $request->berkas . '/' . $temporaryFile->filename))
+                ->toMediaCollection('berkas');
+            rmdir(storage_path('app/berkas/tmp/' . $request->berkas));
+            $temporaryFile->delete();
+        }
+
+
+        return redirect('task')->with('status', 'Task successfully created.');
         
     }
 
@@ -97,5 +108,24 @@ class TaskController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function upload(Request $request) {
+        if ($request->hasFile('berkas')) {
+            $file = $request->file('berkas');
+            $filename = $file->getClientOriginalName();
+            $folder = uniqid() . '-' . now()->timestamp;
+            $file->storeAs('berkas/tmp/' . $folder, $filename);
+            
+            TemporaryFile::create([
+                'folder' => $folder,
+                'filename' => $filename
+            ]);
+
+            return $folder;
+        }
+
+        return '';
+
     }
 }

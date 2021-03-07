@@ -13,7 +13,8 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
     <link href="{{ asset('theme/css/sb-admin-2.min.css')}}" rel="stylesheet">
-    <link href="{{ asset('theme/css/style.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('theme/css/filepond.css')}}" type="text/css" [href]="sanitizer.bypassSecurityTrustResourceUrl(cssUrl)">
+    <link href="{{ asset('theme/css/style.css')}}" rel="stylesheet" >
 </head>
 <body class="sidebar-toggled">
     
@@ -28,7 +29,7 @@
                 <div class="sidebar-brand-icon">
                     <i class="fas fa-building"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SMART <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">KPP <sup>302</sup></div>
             </a>
 
             <!-- Divider -->
@@ -201,7 +202,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyleft &copy; KPP Pratama Medan Barat 2020</span>
+                        <span>Copyleft &copy; KPP Pratama Baturaja 2020</span>
                     </div>
                 </div>
             </footer>
@@ -246,6 +247,7 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('theme/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('theme/js/demo/chart-pie-demo.js') }}"></script>
+    <script src="{{ asset('theme/js/filepond/filepond.min.js') }}"></script>
     @yield('scripts')
 </body>
 </html>
