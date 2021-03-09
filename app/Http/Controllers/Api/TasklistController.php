@@ -24,7 +24,7 @@ class TasklistController extends Controller
         $dataResponse = json_encode($data, true);
 
         return response()->json([
-            'Message' => 'Success Test API Endpoint',
+            'message' => 'Success Test API Endpoint',
             'success' => true,
             'data' => $dataResponse
         ], 200);

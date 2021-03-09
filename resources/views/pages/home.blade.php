@@ -100,11 +100,7 @@
 </div>
 
 <div class="row">
-    @if (session('status'))
-        <div class="col-lg-6 alert alert-success mx-auto" id="flash-message">
-            {{ session('status') }}
-        </div>
-    @endif
+        <div class="col-lg-6 alert alert-success mx-auto" id="flash-message">{{ session('message') }}</div>   
     <div class="col-lg-12 mb-8">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -243,10 +239,20 @@
 @section('scripts')
 <script>
     const flashMessage = document.getElementById("flash-message");
-    document.addEventListener("DOMContentLoaded", () => {
-        setTimeout(() => {
-            flashMessage.remove();
-        }, 3000);
-    });
+    
+    
+        document.addEventListener("DOMContentLoaded", () => {
+            if (sessionStorage.getItem('message')) {
+                flashMessage.innerHTML = `${sessionStorage.getItem('message')}`;
+                
+                setTimeout(() => {
+                    flashMessage.style.display = "none";
+                    sessionStorage.removeItem('message')
+                }, 3000);
+
+            }
+        });
+   
+    
 </script>
 @endsection

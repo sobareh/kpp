@@ -43,7 +43,7 @@
               <label htmlFor="exampleFormControlSelect1">Delegasikan Tugas Ke:</label>
               <div class="form-row">
                 <div class="col-7">
-                  <select class="form-control" name="seksi[]" id="seksi" multiple="multiple">
+                  <select class="form-control" name="seksi" id="seksi">
                     <option value="1">Seksi Pelayanan</option>
                     <option value="2">Subbagian Umum dan Kepatuhan Internal</option>
                     <option value="3">Seksi Pengolahan Data dan Informasi</option>
@@ -137,14 +137,19 @@
                       },
                       method: "POST",
                       body: JSON.stringify(data),
-                    } 
+                    }
+
       e.preventDefault()
       fetch("/api/tasklist", options)
       .then(response => response.json())
       .then(data => {
         console.log(data);
         if (data.success === true) {
-          setTimeout(() => window.location = "/task" ,3000) 
+          setTimeout(() => {
+            sessionStorage.setItem("message", data.message);
+            window.location = "/task"; 
+          }
+          ,2000) 
         }
       })
       .catch(error => console.log(error))
