@@ -8,49 +8,26 @@ use App\Http\Controllers\Controller;
 
 class TasklistController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+
         $data = json_decode($request->getContent(), true);
         
-        foreach ($data as $item) {
-            $tasklist = new TaskUser;
-            $tasklist->task_id = 1;
-            $tasklist->user_id = $item["userId"];
-            $tasklist->priority = intval($item["priority"]);
-            $tasklist->save();
-        }
+        // foreach ($data as $item) {
+        //     $tasklist = new TaskUser;
+        //     $tasklist->task_id = 1;
+        //     $tasklist->user_id = $item["userId"];
+        //     $tasklist->priority = intval($item["priority"]);
+        //     $tasklist->save();
+        // }
+
+        $dataResponse = json_encode($data, true);
 
         return response()->json([
             'Message' => 'Success Test API Endpoint',
-            'state' => 'CA'
-            // 'data' => $data[0]->priority
-        ]);;
+            'success' => true,
+            'data' => $dataResponse
+        ], 200);
     }
 
     /**
