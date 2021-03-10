@@ -147,8 +147,13 @@
                                     @endif
                                 </td>
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-primary btn-sm"><i
-                                            class="fas fa-edit"></i> Disposisi</a>
+                                    {{-- @if () --}}
+                                        <a href="#" class="btn btn-primary btn-sm {{App\TaskUser::taskId($item->id) ? 'disabled' : '' }} "><i
+                                                class="fas fa-edit"></i> Disposisi</a>
+                                    {{-- @else
+                                        <a href="#" class="btn btn-primary btn-sm"><i
+                                                class="fas fa-edit"></i> Disposisi</a>
+                                    @endif --}}
                                     <a href="#" class="btn btn-warning btn-sm"><i
                                             class="fas fa-edit"></i> Edit</a>
                                     <a href="/download/{{$item->id}}" class="btn btn-info btn-sm "><i

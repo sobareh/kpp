@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
             DB::table('users')->insert([
                 'name' => $faker->name, 
                 'username' => $faker->userName, 
-                'password' => Hash::make(12345678), 
+                'password' => bcrypt("12345678"), 
                 'role_id' => 2, 
                 'position' => "Seksi " . $arraySeksi[$i - 1],
             ]);

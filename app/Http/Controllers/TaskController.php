@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Task; 
 use App\TaskUser;
-use Carbon\Carbon;
 use App\TemporaryFile;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\Support\MediaStream;
@@ -31,6 +30,8 @@ class TaskController extends Controller
      */
     public function create()
     {
+        
+
         return view('pages.create');
     }
 
@@ -137,7 +138,7 @@ class TaskController extends Controller
     {
         $asset = Task::findOrFail($request->id);
         $imagesToDownload = $asset->getMedia('berkas');
-        $time = Carbon::now()->timestamp;
+        $time = now()->timestamp;
 
         return MediaStream::create( 'File-' . $time . '.zip')->addMedia($imagesToDownload);
     }

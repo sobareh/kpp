@@ -11,12 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware(['auth'])->group(function () {
+    Route::post('upload', 'TaskController@upload');
+    Route::get('download/{id}', 'TaskController@download');
+    Route::resource('task', 'TaskController');
+    Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 });
 
-Route::post('upload', 'TaskController@upload');
-Route::get('download/{id}', 'TaskController@download');
-Route::resource('task', 'TaskController');
 
 Route::view('detail', 'pages.detail');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
