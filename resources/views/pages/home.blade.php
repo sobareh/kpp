@@ -100,7 +100,9 @@
 </div>
 
 <div class="row">
-        <div class="col-lg-6 alert alert-success mx-auto" id="flash-message">{{ session('message') }}</div>   
+        @if (session('status'))
+            <div class="col-lg-6 alert alert-success mx-auto" id="flash-message">{{ session('status') }}</div>   
+        @endif
     <div class="col-lg-12 mb-8">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -109,14 +111,14 @@
             <div class="card-body">
                  <a href="/task/create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-2"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Tambah Data</a>
-                <table class="table table-bordered">
+                <table class="table table-bordered table">
                     <thead>
                         <tr class="text-center">
                             <th>#</th>
                             <th>Uraian Kegiatan</th>
                             <th>Sumber</th>
                             <th>Jatuh Tempo</th>
-                            <th>Berkas</th>
+                            <th>Status Disposisi</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -127,15 +129,30 @@
                                 <td>{{ $item->uraian_kegiatan }}</td>
                                 <td>{{ $item->sumber }}</td>
                                 <td>{{ $item->jatuh_tempo }}</td>
-                                <td class="text-center"><a href="{{ $item->url_berkas }}" class="btn btn-info btn-circle btn-sm " title="Info Data"><i
-                                    class="fas fa-file"></i></a></td>
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-info btn-circle btn-sm" title="Info Data"><i
-                                            class="fas fa-info-circle"></i></a>
-                                    <a href="#" class="btn btn-warning btn-circle btn-sm" title="Edit Data"><i
-                                            class="fas fa-edit"></i></a>
-                                    <a href="#" class="btn btn-danger btn-circle btn-sm" title="Delete Data"><i
-                                            class="fas fa-trash"></i></a>
+                                    @if (App\TaskUser::taskId($item->id))
+                                        <a href="#" class="btn btn-success btn-icon-split btn-sm">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-check"></i>
+                                            </span>
+                                            <span class="text">Sudah</span>
+                                        </a>
+                                    @else
+                                        <a href="#" class="btn btn-danger btn-icon-split btn-sm">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-times"></i>
+                                            </span>
+                                            <span class="text">Belum</span>
+                                        </a>
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    <a href="#" class="btn btn-primary btn-sm"><i
+                                            class="fas fa-edit"></i> Disposisi</a>
+                                    <a href="#" class="btn btn-warning btn-sm"><i
+                                            class="fas fa-edit"></i> Edit</a>
+                                    <a href="/download/{{$item->id}}" class="btn btn-info btn-sm "><i
+                                        class="fas fa-file"></i> Berkas</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -144,6 +161,7 @@
                 <div class="mx-auto">
                   {{ $data ?? ''->links() }}
                 </div>
+                {{-- {{ App\Task::first()->getFirstMedia('berkas') }} --}}
             </div>
         </div>
     </div>
@@ -153,46 +171,6 @@
 
   <!-- Content Column -->
   <div class="col-lg-6 mb-4">
-
-      {{-- <!-- Project Card Example -->
-      <div class="card shadow mb-4">
-          <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
-          </div>
-          <div class="card-body">
-              <h4 class="small font-weight-bold">Server Migration <span
-                      class="float-right">20%</span></h4>
-              <div class="progress mb-4">
-                  <div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
-                      aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-              <h4 class="small font-weight-bold">Sales Tracking <span
-                      class="float-right">40%</span></h4>
-              <div class="progress mb-4">
-                  <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
-                      aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-              <h4 class="small font-weight-bold">Customer Database <span
-                      class="float-right">60%</span></h4>
-              <div class="progress mb-4">
-                  <div class="progress-bar" role="progressbar" style="width: 60%"
-                      aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-              <h4 class="small font-weight-bold">Payout Details <span
-                      class="float-right">80%</span></h4>
-              <div class="progress mb-4">
-                  <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
-                      aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-              <h4 class="small font-weight-bold">Account Setup <span
-                      class="float-right">Complete!</span></h4>
-              <div class="progress">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
-                      aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-          </div>
-      </div> --}}
-
   </div>
 
   <div class="col-lg-6 mb-4">
@@ -239,20 +217,14 @@
 @section('scripts')
 <script>
     const flashMessage = document.getElementById("flash-message");
-    
-    
-        document.addEventListener("DOMContentLoaded", () => {
-            if (sessionStorage.getItem('message')) {
-                flashMessage.innerHTML = `${sessionStorage.getItem('message')}`;
-                
-                setTimeout(() => {
-                    flashMessage.style.display = "none";
-                    sessionStorage.removeItem('message')
-                }, 3000);
-
-            }
-        });
-   
-    
+    document.addEventListener("DOMContentLoaded", () => {
+        if (flashMessage.innerText.length > 0) {
+            setTimeout(() => {
+                flashMessage.style.display = 'none'
+            }, 3000);
+        } else {
+            flashMessage.remove();
+        }
+    });
 </script>
 @endsection

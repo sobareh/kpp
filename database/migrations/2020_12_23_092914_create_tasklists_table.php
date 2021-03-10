@@ -18,7 +18,6 @@ class CreateTasklistsTable extends Migration
             $table->string('uraian_kegiatan', 255);
             $table->string('sumber',100);
             $table->dateTime('jatuh_tempo');
-            $table->string('url_berkas');
             $table->dateTime('status')->nullable();
             $table->timestamps();
         });

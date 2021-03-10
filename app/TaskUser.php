@@ -8,9 +8,9 @@ class TaskUser extends Model
 {
     protected $table = 'task_user';
 
-    public function scopetaskId($query)
+    public function scopetaskId($query, $taskId)
     {
-        return $query->where('task_id', '=', 1);
+        return $query->where('task_id', $taskId)->exists();
     }
 
     public function scopeuserId($query, $id)

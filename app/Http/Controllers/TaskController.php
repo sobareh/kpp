@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Task;
+use App\Task; 
+use App\TaskUser;
+use Carbon\Carbon;
 use App\TemporaryFile;
 use Illuminate\Http\Request;
+use Spatie\MediaLibrary\Support\MediaStream;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class TaskController extends Controller
 {
@@ -38,8 +42,6 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
-
         $request->validate([
             'uraian_kegiatan' => 'required',
             'sumber' => 'required',
@@ -50,13 +52,13 @@ class TaskController extends Controller
            'uraian_kegiatan' => request('uraian_kegiatan'),
            'sumber' => request('sumber'),
            'jatuh_tempo' => request('jatuh_tempo'),
-           'url_berkas' => request('berkas'),
         ]);
 
         $temporaryFile = TemporaryFile::where('folder', $request->berkas)->first();
 
         if ($temporaryFile) {
-            $newTask->addMedia(storage_path('app/berkas/tmp/' . $request->berkas . '/' . $temporaryFile->filename))
+            $newTask
+                ->addMedia(storage_path('app/berkas/tmp/' . $request->berkas . '/' . $temporaryFile->filename))
                 ->toMediaCollection('berkas');
             rmdir(storage_path('app/berkas/tmp/' . $request->berkas));
             $temporaryFile->delete();
@@ -75,7 +77,7 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -129,5 +131,14 @@ class TaskController extends Controller
 
         return '';
 
+    }
+
+    public function download(Request $request)
+    {
+        $asset = Task::findOrFail($request->id);
+        $imagesToDownload = $asset->getMedia('berkas');
+        $time = Carbon::now()->timestamp;
+
+        return MediaStream::create( 'File-' . $time . '.zip')->addMedia($imagesToDownload);
     }
 }

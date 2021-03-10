@@ -13,13 +13,13 @@ class TasklistController extends Controller
 
         $data = json_decode($request->getContent(), true);
         
-        // foreach ($data as $item) {
-        //     $tasklist = new TaskUser;
-        //     $tasklist->task_id = 1;
-        //     $tasklist->user_id = $item["userId"];
-        //     $tasklist->priority = intval($item["priority"]);
-        //     $tasklist->save();
-        // }
+        foreach ($data as $item) {
+            $tasklist = new TaskUser;
+            $tasklist->task_id = 1;
+            $tasklist->user_id = $item["userId"];
+            $tasklist->priority = intval($item["priority"]);
+            $tasklist->save();
+        }
 
         $dataResponse = json_encode($data, true);
 

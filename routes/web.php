@@ -15,7 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('task', 'TaskController');
 Route::post('upload', 'TaskController@upload');
+Route::get('download/{id}', 'TaskController@download');
+Route::resource('task', 'TaskController');
 
 Route::view('detail', 'pages.detail');
