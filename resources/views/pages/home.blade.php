@@ -172,18 +172,14 @@
     </div>
 </div>
  <!-- Content Row -->
-<div class="row">
-
-  <!-- Content Column -->
-  <div class="col-lg-6 mb-4">
-  </div>
+<div class="row justify-content-center">
 
   <div class="col-lg-6 mb-4">
 
       <!-- Illustrations -->
       <div class="card shadow mb-4">
           <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Task Management App</h6>
           </div>
           <div class="card-body">
               <div class="text-center">

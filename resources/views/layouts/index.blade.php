@@ -12,9 +12,11 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-    <link href="{{ asset('theme/css/sb-admin-2.min.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('theme/css/filepond.css')}}" type="text/css" [href]="sanitizer.bypassSecurityTrustResourceUrl(cssUrl)">
-    <link href="{{ asset('theme/css/style.css')}}" rel="stylesheet" >
+    {{-- <link href="{{ asset('theme/css/sb-admin-2.min.css')}}" rel="stylesheet"> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('theme/css/filepond.css')}}" type="text/css" [href]="sanitizer.bypassSecurityTrustResourceUrl(cssUrl)">
+    <link href="{{ asset('theme/css/style.css')}}" rel="stylesheet" > --}}
+
+    <link href="{{ asset('css/combine.css')}}" rel="stylesheet">
 </head>
 <body class="sidebar-toggled">
     
@@ -25,7 +27,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                 <div class="sidebar-brand-icon">
                     <i class="fas fa-building"></i>
                 </div>
@@ -37,7 +39,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{ route('task.index') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
             </li>
@@ -45,21 +47,23 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Admin
-            </div>
+            @if (auth()->user()->role_id === 1)
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Admin
+                </div>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Users Settings</span>
-                </a>
-            </li>
+                <!-- Nav Item - Utilities Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Users Settings</span>
+                    </a>
+                </li>   
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+            @endif
 
             <!-- Heading -->
             <div class="sidebar-heading">
@@ -232,14 +236,14 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('theme/vendor/jquery/jquery.min.js') }}"></script>
+    {{-- <script src="{{ asset('theme/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('theme/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="{{ asset('theme/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="{{ asset('theme/js/sb-admin-2.min.js') }}"></script>
+    <script src="{{ asset('theme/js/sb-admin-2.min.js') }}"></script> --}}
 
     <!-- Page level plugins -->
     {{-- <script src="{{ asset('theme/vendor/chart.js/Chart.min.js') }}"></script> --}}
@@ -247,7 +251,9 @@
     <!-- Page level custom scripts -->
     {{-- <script src="{{ asset('theme/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('theme/js/demo/chart-pie-demo.js') }}"></script> --}}
-    <script src="{{ asset('theme/js/filepond/filepond.min.js') }}"></script>
+    {{-- <script src="{{ asset('theme/js/filepond/filepond.min.js') }}"></script> --}}
+
+    <script src="{{ asset('js/combine.js') }}"></script>
     @yield('scripts')
 </body>
 </html>

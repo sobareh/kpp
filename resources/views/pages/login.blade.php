@@ -9,8 +9,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <title>Task Management - Login</title>
 
+    {{-- <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('icon/favicon-96x96.png') }}"> --}}
     <!-- Custom fonts for this template-->
     <link href="{{ asset('theme/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
@@ -18,7 +19,8 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="{{ asset('theme/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    {{-- <link href="{{ asset('theme/css/sb-admin-2.min.css')}}" rel="stylesheet"> --}}
+    <link href="{{ asset('css/combine.css')}}" rel="stylesheet">
 
 </head>
 
@@ -29,7 +31,7 @@
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
-            <div class="col-lg-6">
+            <div class="col-lg-5">
 
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
@@ -38,15 +40,15 @@
                             <div class="col-lg mb-5">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Silahkan Login</h1>
+                                        <h1 class="h3 text-gray-900 mb-4">Silahkan Login!</h1>
                                     </div>
-                                    <form class="user" method="POST" action="{{ route('login') }}">
+                                    <form class="user" method="POST" action="{{ route('login') }}" autocomplete="off" >
                                         @csrf
 
                                         <div class="form-group">
                                             <input id="username" type="text"
                                                 class="form-control form-control-user @error('username') is-invalid @enderror"
-                                                name="username" value="{{ old('username') }}" autocomplete="username"
+                                                name="username" value="{{ old('username') }}"
                                                 placeholder="Enter Username...">
                                             @error('username')
                                             <span class="invalid-feedback" role="alert">
@@ -57,7 +59,7 @@
                                         <div class="form-group">
                                             <input id="password" type="password"
                                                 class="form-control form-control-user @error('password') is-invalid @enderror"
-                                                name="password" required autocomplete="current-password" placeholder="Password">
+                                                name="password" required placeholder="Password">
 
                                             @error('password')
                                             <span class="invalid-feedback" role="alert">
@@ -94,7 +96,7 @@
 
     </div>
 
-    <!-- Bootstrap core JavaScript-->
+    {{-- <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('theme/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('theme/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
@@ -102,7 +104,8 @@
     <script src="{{ asset('theme/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="{{ asset('theme/js/sb-admin-2.min.js') }}"></script>
+    <script src="{{ asset('theme/js/sb-admin-2.min.js') }}"></script> --}}
+    <script src="{{ asset('js/combine.js') }}"></script>
 
 </body>
 
