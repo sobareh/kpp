@@ -11,7 +11,7 @@
 |
 */
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware('auth')->group(function () {
     Route::post('upload', 'TaskController@upload');
     Route::get('download/{id}', 'TaskController@download');
     Route::resource('task', 'TaskController');

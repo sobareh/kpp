@@ -17,7 +17,7 @@ class Task extends Model implements HasMedia
 
     public function users()
     {
-        return $this->belongsToMany("App\User")->withTimestamps()->withPivot(['priority', 'process_at', 'done_at']);
+        return $this->belongsToMany("App\User")->withTimestamps()->withPivot(['task_id','user_id','priority', 'process_at', 'done_at']);
     }
 
     

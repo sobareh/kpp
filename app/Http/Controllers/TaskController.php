@@ -77,8 +77,12 @@ class TaskController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        
+    {  
+        $data = Task::findOrFail($id)->users;
+
+        // dd($data);
+
+        return view('pages.detail', ['data' => $data]);
     }
 
     /**
