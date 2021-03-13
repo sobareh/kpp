@@ -128,7 +128,22 @@
                                 <td>{{ $loop->iteration  }}</td>
                                 <td>{{ $item->uraian_kegiatan }}</td>
                                 <td>{{ $item->sumber }}</td>
-                                <td>{{ $item->jatuh_tempo }}</td>
+                                <td class="text-center"> <span class="badge badge-" . 
+                                    @if (App\Task::diffInDaysFilter($item->jatuh_tempo) > 0)
+                                     'primary';
+                                    @endif
+                                    {{
+                                        if(){
+                                            
+                                        } else if(App\Task::diffInDaysFilter($item->jatuh_tempo) < 0) {
+                                            return 'danger';
+                                        } else {
+                                            return 'warning';
+                                        }
+                                    }} ">
+                                        {{ App\Task::diffInDaysFilter($item->jatuh_tempo) }}
+                                    </span>
+                                </td>
                                 <td class="text-center">
                                     @if (App\TaskUser::taskId($item->id))
                                         <a href="#" class="btn btn-success btn-icon-split btn-sm">
